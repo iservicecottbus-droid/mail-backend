@@ -51,13 +51,3 @@ Telefon: ${data.phone}
     res.json({ success: true });
   } catch (error) {
     console.error("Fehler beim Mailversand:");
-    console.error(error);
-    res.status(500).json({ success: false, error: String(error) });
-  }
-});
-
-const PORT = process.env.PORT || 3001;
-
-app.listen(PORT, () => {
-  console.log("Server läuft auf Port " + PORT);
-});
