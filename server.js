@@ -47,6 +47,34 @@ Email: ${data.email}
 Telefon: ${data.phone}
       `
     });
+    await transporter.sendMail({
+  from: `"Handy Rettung" <${process.env.EMAIL_USER}>`,
+  to: data.email,
+  subject: "Deine Terminanfrage bei Handy Rettung",
+  text: `
+Hallo ${data.name},
+
+vielen Dank für deine Terminanfrage bei Handy Rettung.
+
+Wir haben deine Anfrage erhalten und melden uns schnellstmöglich bei dir zur Bestätigung.
+
+Deine Anfrage:
+-------------------------
+Standort: ${data.location}
+Datum: ${data.date}
+Uhrzeit: ${data.time}
+
+Gerät: ${data.brand} ${data.model}
+Reparatur: ${data.repair}
+-------------------------
+
+Falls du noch Fragen hast, kannst du uns jederzeit antworten oder per WhatsApp kontaktieren.
+
+Viele Grüße
+Handy Rettung
+www.handy-rettung.de
+`
+});
 
     console.log("Mail erfolgreich versendet.");
     res.json({ success: true });
