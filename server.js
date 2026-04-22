@@ -27,7 +27,7 @@ app.post("/send", async (req, res) => {
     console.log("Versuche Mail zu senden...");
 
     await transporter.sendMail({
-      from: '"Handy Rettung" <iservicecottbus@gmail.com>',
+      from: `"Handy Rettung" <${process.env.EMAIL_USER}>`,
       to: "iserviceleipzig@gmail.com",
       subject: "Neue Terminanfrage",
       text: `
