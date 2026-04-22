@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
@@ -11,8 +12,8 @@ app.use(express.json());
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "iservicecottbus@gmail.com",
-    pass: "eciv arko hkdw hyyf"
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
 
@@ -50,4 +51,13 @@ Telefon: ${data.phone}
     console.log("Mail erfolgreich versendet.");
     res.json({ success: true });
   } catch (error) {
-    console.error("Fehler beim Mailversand:");
+  console.error("Fehler beim Mailversand:");
+  console.error(error);
+  res.status(500).json({ success: false, error: String(error) });
+}
+});
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log("Server läuft auf Port " + PORT);
+});
